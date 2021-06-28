@@ -1,0 +1,54 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="karistiran_message card bg-{{category}}">
+        <div class="d-flex flex-row">
+            <div class="icon">
+                {% if category == "success" %}
+                <center>
+                    <i class="fas fa-check fa-3x"></i></center>
+                {% elif category == "error" or category == "danger" %}
+                <center>
+                    <i class="fas fa-times fa-3x"></i></center>
+                {% elif category == "warning" %}
+                <center>
+                    <i class="fas fa-exclamation-triangle fa-3x"></i></center>
+                {% elif category == "info" %}
+                <center>
+                    <i class="fas fa-info-circle fa-3x"></i></center>
+                {% endif %}
+            </div>
+            <div class="msg" style="height:30rem">
+                <div class="exit"><i class="fas fa-times"></i></div>
+                <div class="karistiran_message_label">{{message}}</div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<script>
+var i = 0;
+
+document.querySelector(".exit").addEventListener("click",()=>{
+    clearInterval(counterBack);
+    document.querySelector(".karistiran_message").hidden = true;
+})
+
+var counterBack = setInterval(function () {
+  i+=5;
+  if (i > 0) {
+    document.querySelector(".progress-bar").style.width = `${i}%`;
+  } if (i == 110){
+    clearInterval(counterBack);
+    document.querySelector(".karistiran_message").hidden = true;
+    i = 0;
+  }
+},200);
+</script>
+
+

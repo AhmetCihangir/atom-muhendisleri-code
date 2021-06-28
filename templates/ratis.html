@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+
+{% block string %}
+
+<div class="container" style="margin-bottom: 20rem;margin-top: 20rem;">
+
+    <div class="card card-main">
+        {% if _is_right %}
+        <div class="card-right">
+            <div class="check card">
+                <i class="far fa-check-circle text-success"></i>
+                <p class="text-success font-weight">Doğru</p>
+            </div>
+        </div>
+        {% elif _is_right == False %}
+        <div class="card-right">
+            <div class="check card">
+                <i class="far fa-times-circle text-danger"></i>
+                <p class="text-danger font-weight">Yanlış</p>
+            </div>
+        </div>
+        {% endif %}
+        <label id="ratis">{{result_txt}}</label>
+
+        {% from "includes/_formhelpers.html" import render_field %}
+        <form method=post>
+        <dl class="text-decoration-none">
+            {{ render_field(form.answer_question , class="degis") }}
+        </dl>
+        <button type="submit" class="_btn">Kontrol Et</button>
+        </form>
+        
+
+
+    </div>
+</div>
+
+
+<script>
+    document.querySelector('dt label').hidden = true;
+    var card_main = document.querySelector('.card-main')
+    {% if _is_right == True or _is_right == False%}
+    card_main.style.padding = "1.5rem 4rem 11.3rem 4rem";
+    {% else %}
+    card_main.style.padding = "11.3rem 4rem"; 
+    {% endif %}
+</script>
+
+
+{% endblock string %}

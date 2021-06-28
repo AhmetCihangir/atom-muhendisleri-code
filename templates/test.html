@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block string %}
+
+<div class="container">
+    <form class="card card-main" method="post" style="margin-bottom: 10.5rem;margin-top: 20rem;">
+        {% if _is_right %}
+        <div class="card-right">
+            <div class="check card">
+                <i class="far fa-check-circle text-success"></i>
+                <p class="text-success font-weight">Doğru</p>
+            </div>
+        </div>
+        {% elif _is_right == False %}
+        <div class="card-right">
+            <div class="check card">
+                <i class="far fa-times-circle text-danger"></i>
+                <p class="text-danger font-weight">Yanlış</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="card-right">
+            <div class="check card">
+                <i class="far fa-times-circle text-danger" style="display: none;"></i>
+                <p class="text-danger font-weight"></p>
+            </div>
+        </div>
+        {% endif %}
+        <p id="txt" style="margin-bottom: 3rem;margin-top: 2rem;">{{txt}}</p>
+        {% for answer in answers %}
+        <div>
+            <input type="radio" name="answers" id="{{answer}}" value="{{answer}}">
+            <label for="{{answer}}">{{answer}}</label>
+        </div>
+    
+        {% endfor %}        
+
+        <button type="submit" id="answer_btn" class="_btn">Kontrol Et</button>
+    </form>
+
+</div>
+
+<script>
+    var card_main = document.querySelector('.card-main')
+    {% if _is_right == True or _is_right == False%}
+    card_main.style.padding = "1.5rem 4rem 11.3rem 4rem";
+    {% else %}
+    card_main.style.padding = "11.3rem 4rem"; 
+    {% endif %}
+</script>
+
+{% endblock string %}

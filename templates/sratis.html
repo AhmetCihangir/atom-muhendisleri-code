@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+
+{% block string %}
+
+<div class="container" style="margin-bottom: 20rem;margin-top: 20rem;">
+
+
+
+    <div class="card card-main">
+        <p id="ratis">{{result_txt[0]}}</p>
+        <form method="post">
+            <input type="text" class="degis" name="answer">
+            <button type="submit" id="answer_btn" class="_btn">Kontrol Et</button>
+            <input type="number" class="timer" name="timer" id="timer" value="{{session["timer"]}}" readonly>
+        </form>
+        <button class="timer bg-dark text-light" onclick="start()">Başla</button>
+    </div>
+</div>
+
+
+<script>
+    var card_main = document.querySelector('.card-main')
+    card_main.style.padding = "11.3rem 4rem"; 
+
+    
+    let time = document.getElementById("timer");
+
+    if(time.value !== "1.00" ){
+        start()
+    }
+
+    function start(){
+        let timer = setInterval(()=>{
+            if(time.value==0){
+                clearInterval(timer)
+                document.getElementById("answer_btn").click()
+            }else if(time.value==="1.00"){
+                time.value = 59
+            }else{
+                time.value = time.value-1
+            }
+        },1000)
+    }
+
+
+
+
+</script>
+
+
+{% endblock string %}
